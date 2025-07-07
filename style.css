@@ -1,5 +1,8 @@
 /* style.css */
 
+/* --- External Font Import (Add this to your HTML <head> or import via @import in CSS) --- */
+/* @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap'); */
+
 /* --- Global Variables for Theming --- */
 :root {
     --minecraft-font: 'Press Start 2P', cursive;
@@ -7,8 +10,9 @@
     --white: #FFFFFF;
     --light-gray: #CCCCCC;
     --dark-gray: #333333;
+    --darker-gray: #1a1a1a; /* Defined: Used for disabled button shadows */
     --border-color: #555555; /* For block outlines and shadows */
-    --accent-green: #ffffff; /* A distinct Minecraft-like green for accents */
+    --accent-green: var(--white); /* Corrected: Accent color changed to white as requested */
     --accent-red: #FF0000;   /* For the heart icon */
 }
 
@@ -91,7 +95,7 @@ a:hover {
     border: 2px solid var(--border-color);
     padding: 25px;
     text-align: center;
-    box-shadow: 5px 5px 0px var(--dark-gray);
+    box-shadow: 5px 5px 0px var(--white);
     border-radius: 4px;
 }
 
@@ -104,47 +108,26 @@ a:hover {
     overflow: hidden;
 }
 
-.minecraft-avatar {
+.avatar {
     position: relative;
-    width: 150px;
-    height: 150px;
+    width: 128px; /* Match your image width */
+    height: 128px; /* Match your image height */
     margin: 0 auto 20px;
-    border: 5px solid var(--white); /* White border around the avatar */
     background-color: var(--black);
-    overflow: hidden;
-    border-radius: 8px; /* Blocky but slightly rounded avatar frame */
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2); /* Subtle glow */
+    border: 5px solid var(--border-color); /* Base border */
+    border-radius: 8px; /* Blocky but slightly rounded */
+    overflow: hidden; /* Contains the effects */
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.808); /* Subtle cyan outer glow */
 }
 
-.minecraft-avatar img {
+.avatar img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensures the image covers the area */
-    image-rendering: pixelated; /* Crucial for Minecraft pixel art look */
-    filter: grayscale(100%); /* Converts image to black and white */
-}
-
-/* Lightning Effect Animation */
-.lightning-effect {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg, transparent 45%, #ADD8E6 50%, transparent 55%); /* Light blue gradient for lightning */
-    background-size: 200% 200%; /* Allows shifting the gradient */
-    animation: lightningPulse 3s infinite ease-in-out;
-    opacity: 0; /* Starts invisible */
-    pointer-events: none; /* Allows interaction with elements beneath */
-}
-
-@keyframes lightningPulse {
-    0% { background-position: 0% 0%; opacity: 0; }
-    10% { opacity: 0.8; background-position: 100% 100%; } /* Flash on */
-    15% { opacity: 0; } /* Flash off */
-    20% { opacity: 0.7; background-position: 0% 0%; } /* Second flash */
-    25% { opacity: 0; }
-    100% { opacity: 0; } /* Remains off for the rest of the cycle */
+    object-fit: cover;
+    image-rendering: pixelated;
+    filter: grayscale(100%);
+    position: relative;
+    z-index: 1; /* Keep image on top */
 }
 
 .header h1 {
@@ -352,6 +335,7 @@ a:hover {
     }
 }
 
+/* General disabled attribute styles */
 [disabled] {
     opacity: 0.6; /* Slightly fade out disabled elements */
     cursor: not-allowed; /* Indicate that the element is not interactable */
