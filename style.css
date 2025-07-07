@@ -1,0 +1,392 @@
+/* style.css */
+
+/* --- Global Variables for Theming --- */
+:root {
+    --minecraft-font: 'Press Start 2P', cursive;
+    --black: #000000;
+    --white: #FFFFFF;
+    --light-gray: #CCCCCC;
+    --dark-gray: #333333;
+    --border-color: #555555; /* For block outlines and shadows */
+    --accent-green: #ffffff; /* A distinct Minecraft-like green for accents */
+    --accent-red: #FF0000;   /* For the heart icon */
+}
+
+/* --- Base Styles --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--minecraft-font), monospace; /* Fallback to monospace */
+    background-color: var(--black);
+    color: var(--white);
+    line-height: 1.6;
+    overflow-x: hidden; /* Prevents horizontal scroll issues from animations */
+    background-image: url('assets/bg.png'); /* Background image for the site */
+    background-size: cover; /* Cover the entire viewport */
+    background-attachment: fixed; /* Keep background fixed while scrolling */
+    background-position: center; /* Center the background image */
+    image-rendering: pixelated; /* Ensures pixel art images retain their sharp edges */
+}
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+a {
+    color: var(--white);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* --- Minecraft Aesthetic Utility Classes --- */
+.minecraft-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: var(--dark-gray);
+    border: 2px solid var(--border-color);
+    color: var(--white);
+    text-transform: uppercase;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s, box-shadow 0.1s;
+    box-shadow: 4px 4px 0px var(--border-color); /* Blocky shadow for depth */
+    border-radius: 4px; /* Slightly rounded corners for a softer block */
+    margin-bottom: 20px; /* Added margin-bottom for spacing */
+}
+
+.minecraft-button:hover {
+    background-color: var(--light-gray);
+    color: var(--black);
+    transform: translate(2px, 2px); /* Simulates a button press effect */
+    box-shadow: 2px 2px 0px var(--border-color); /* Smaller shadow when pressed */
+}
+
+.minecraft-block {
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black for sections */
+    border: 2px solid var(--border-color);
+    padding: 40px;
+    margin-bottom: 40px;
+    box-shadow: 8px 8px 0px var(--dark-gray); /* Deeper blocky shadow for sections */
+    position: relative; /* For animations within sections */
+    overflow: hidden; /* Ensures content stays within bounds for animations */
+    border-radius: 6px; /* Slightly more rounded for main blocks */
+    text-align: center; /* Centered content within sections, including inline-block elements */
+    background-image: url('assets/tex.jpg'); /* A small, repeating pixel texture */
+    background-repeat: repeat;
+    background-blend-mode: multiply; /* Blends with the existing background-color */
+    opacity: 0.95; /* Make it slightly transparent to see the texture */
+}
+
+.minecraft-block-inner {
+    background-color: rgba(0, 0, 0, 0.8); /* Darker inner blocks for cards */
+    border: 2px solid var(--border-color);
+    padding: 25px;
+    text-align: center;
+    box-shadow: 5px 5px 0px var(--dark-gray);
+    border-radius: 4px;
+}
+
+/* --- Header Styling --- */
+.header {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: rgba(0, 0, 0, 0.85); /* Darker overlay for header text readability */
+    position: relative;
+    overflow: hidden;
+}
+
+.minecraft-avatar {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 20px;
+    border: 5px solid var(--white); /* White border around the avatar */
+    background-color: var(--black);
+    overflow: hidden;
+    border-radius: 8px; /* Blocky but slightly rounded avatar frame */
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2); /* Subtle glow */
+}
+
+.minecraft-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the area */
+    image-rendering: pixelated; /* Crucial for Minecraft pixel art look */
+    filter: grayscale(100%); /* Converts image to black and white */
+}
+
+/* Lightning Effect Animation */
+.lightning-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent 45%, #ADD8E6 50%, transparent 55%); /* Light blue gradient for lightning */
+    background-size: 200% 200%; /* Allows shifting the gradient */
+    animation: lightningPulse 3s infinite ease-in-out;
+    opacity: 0; /* Starts invisible */
+    pointer-events: none; /* Allows interaction with elements beneath */
+}
+
+@keyframes lightningPulse {
+    0% { background-position: 0% 0%; opacity: 0; }
+    10% { opacity: 0.8; background-position: 100% 100%; } /* Flash on */
+    15% { opacity: 0; } /* Flash off */
+    20% { opacity: 0.7; background-position: 0% 0%; } /* Second flash */
+    25% { opacity: 0; }
+    100% { opacity: 0; } /* Remains off for the rest of the cycle */
+}
+
+.header h1 {
+    font-size: 2.8em;
+    margin-bottom: 10px;
+    color: var(--white);
+    text-shadow: 4px 4px var(--dark-gray); /* Blocky text shadow */
+}
+
+.header p {
+    font-size: 1.1em;
+    color: var(--light-gray);
+    margin-bottom: 20px;
+}
+
+.social-links .social-icon {
+    margin: 0 10px;
+}
+
+/* --- Main Content Sections Styling --- */
+.main-content {
+    padding: 40px 0;
+}
+
+.section h2 {
+    font-size: 2.2em;
+    margin-bottom: 20px;
+    color: var(--accent-green); /* Accent color for section titles */
+    text-shadow: 3px 3px var(--dark-gray);
+    text-align: center;
+}
+
+.section p {
+    margin-bottom: 15px;
+    font-size: 1.05em;
+    color: var(--white);
+}
+
+/* "WORM" Text Animation */
+.worm-text {
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: var(--accent-green);
+    margin-top: 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.worm-text span {
+    display: inline-block;
+    /* UPDATED: Glitchy animation */
+    animation: glitchEffect 0.5s infinite alternate steps(2, start); /* Faster, stepped animation for glitch */
+    text-shadow: 2px 2px var(--dark-gray); /* Base shadow */
+}
+
+@keyframes glitchEffect {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+        text-shadow: 2px 2px var(--dark-gray);
+    }
+    10% {
+        transform: translate(-2px, 2px) scale(0.98);
+        opacity: 0.8;
+        text-shadow: -2px -2px #FF0000; /* Red shift */
+    }
+    20% {
+        transform: translate(3px, -1px) scale(1.02);
+        opacity: 1;
+        text-shadow: 3px 3px #00FFFF; /* Cyan shift */
+    }
+    30% {
+        transform: translate(-1px, 3px) scale(0.99);
+        opacity: 0.7;
+        text-shadow: -1px 1px var(--dark-gray);
+    }
+    40% {
+        transform: translate(2px, -2px) scale(1.01);
+        opacity: 1;
+        text-shadow: 1px -1px #FF00FF; /* Magenta shift */
+    }
+    50% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.9;
+        text-shadow: 2px 2px var(--dark-gray);
+    }
+    60% {
+        transform: translate(-3px, 1px) scale(0.97);
+        opacity: 1;
+        text-shadow: -3px 0px #FFFF00; /* Yellow shift */
+    }
+    70% {
+        transform: translate(1px, -3px) scale(1.03);
+        opacity: 0.85;
+        text-shadow: 0px 3px var(--dark-gray);
+    }
+    80% {
+        transform: translate(-2px, 0px) scale(0.99);
+        opacity: 1;
+        text-shadow: -2px -2px #00FF00; /* Green shift */
+    }
+    90% {
+        transform: translate(0px, 2px) scale(1.01);
+        opacity: 0.75;
+        text-shadow: 2px 0px var(--dark-gray);
+    }
+    100% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+        text-shadow: 2px 2px var(--dark-gray);
+    }
+}
+
+
+/* Projects Grid Layout */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.project-card {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.project-card:hover {
+    transform: translateY(-10px); /* Lift effect on hover */
+    box-shadow: 10px 10px 0px var(--accent-green); /* Accent color shadow on hover */
+}
+
+.project-card h3 {
+    color: var(--white);
+    margin-bottom: 10px;
+    font-size: 1.5em;
+    text-shadow: 2px 2px var(--dark-gray);
+}
+
+.project-card p {
+    font-size: 0.95em;
+    margin-bottom: 20px;
+    color: var(--light-gray);
+}
+
+/* Contact Section Specifics */
+.discord-invite {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1.1em;
+}
+
+.discord-invite a {
+    color: var(--accent-green);
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+/* --- Footer Styling --- */
+.footer {
+    text-align: center;
+    padding: 30px 20px;
+    background-color: rgba(0, 0, 0, 0.85);
+    font-size: 0.9em;
+    color: var(--light-gray);
+}
+
+.footer .heart-pixel {
+    color: var(--accent-red); /* Red heart */
+    font-size: 1.2em;
+    display: inline-block;
+    animation: heartbeat 1.5s infinite; /* Heartbeat animation */
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    25% { transform: scale(1.2); }
+    50% { transform: scale(1); }
+    75% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 2em;
+    }
+
+    .section h2 {
+        font-size: 1.8em;
+    }
+
+    .project-grid {
+        grid-template-columns: 1fr; /* Stack projects vertically on small screens */
+    }
+
+    .minecraft-block, .minecraft-block-inner {
+        padding: 20px; /* Reduce padding on smaller screens */
+        box-shadow: 4px 4px 0px var(--dark-gray); /* Smaller shadow */
+    }
+
+    .minecraft-button {
+        padding: 8px 15px;
+        font-size: 0.8em;
+    }
+}
+
+[disabled] {
+    opacity: 0.6; /* Slightly fade out disabled elements */
+    cursor: not-allowed; /* Indicate that the element is not interactable */
+    pointer-events: none; /* Disable all pointer events on the element */
+    filter: grayscale(100%); /* Make it grayscale to visually indicate disability */
+}
+
+/* Specific styles for a disabled Minecraft-style button using the [disabled] attribute */
+.minecraft-button[disabled] {
+    background-color: var(--dark-gray); /* Use the dark gray for disabled background */
+    border-color: var(--border-color); /* Maintain border color */
+    color: var(--light-gray); /* Lighter text color to indicate it's not active */
+    box-shadow: 2px 2px 0px var(--darker-gray); /* A less prominent shadow */
+    transform: none; /* No transform for disabled buttons */
+    pointer-events: none; /* Ensure no interaction */
+    cursor: not-allowed; /* Change cursor */
+    opacity: 0.7; /* Slightly dim it */
+}
+
+/* Styles for a generic '.disabled' class, if you prefer to apply disability via a class */
+.disabled {
+    opacity: 0.6; /* Similar to the attribute, fade it out */
+    cursor: not-allowed;
+    pointer-events: none;
+    filter: grayscale(100%);
+}
+
+/* If you want a specific Minecraft-button look for a generic .disabled class */
+.minecraft-button.disabled {
+    background-color: var(--dark-gray);
+    border-color: var(--border-color);
+    color: var(--light-gray);
+    box-shadow: 2px 2px 0px var(--darker-gray);
+    transform: none;
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
